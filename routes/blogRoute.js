@@ -59,10 +59,7 @@ router.get("/readPost", async (req, res) => {
 router.post("/commentOnPost/:id", (req, res) => {
     try {
         const { comment, userId } = req.body
-
         let data = { "comment": comment, "userId": userId }
-        console.log(data);
-
         Blog.findByIdAndUpdate({ _id: req.params.id }, { $push: { 'comments': data } }, (err, result) => {
             if (err) {
                 res.send(err);
@@ -75,17 +72,16 @@ router.post("/commentOnPost/:id", (req, res) => {
     catch (err) {
         res.send(err);
     }
-
 })
 
-// // read all comments  with username
-router.get("/all/comment", (req, res) => {
+// read all comments  with username
+router.get("/allData", (req, res) => {
     Blog.find()
-        .populate({ path: "comments.userId", select: 'userName' })
-        .then((data) => {
-            res.send
+        .populate({ path: "comments.userId", select: 'name' })
+        .then(data => {
+            res.send(data)
         })
-        .catch((err) => {
+        .catch(err => {
             res.send(err)
         })
 })

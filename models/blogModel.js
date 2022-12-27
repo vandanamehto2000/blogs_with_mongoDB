@@ -13,7 +13,7 @@ const blogSchema = new mongoose.Schema({
         {
             comment: { type: String, default: "" },
             userId:
-                { type: mongoose.Schema.Types.ObjectId, ref: "userModel" }
+                { type: mongoose.Schema.Types.ObjectId, ref: "users" }
         }
     ],
 
